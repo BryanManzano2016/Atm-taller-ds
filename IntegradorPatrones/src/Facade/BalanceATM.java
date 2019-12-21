@@ -1,22 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+ 
 package Facade;
+ 
+import Singleton.AtmUK;
 
-/**
- *
- * @author Dark
- */
 public class BalanceATM extends javax.swing.JFrame {
 
-    /**
-     * Creates new form BalanceATM
-     */
     public BalanceATM() {
         initComponents();
+        setDefaultCloseOperation(Depositos.DISPOSE_ON_CLOSE);
     }
+    
+    public void agregarElementos(AtmUK atmUk){
+        this.estado.setText("Dinero de ATM: " + atmUk.getTotal());
+    }    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,21 +23,59 @@ public class BalanceATM extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnAtras = new javax.swing.JButton();
+        estado = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        btnAtras.setText("Atras");
+        btnAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasActionPerformed(evt);
+            }
+        });
+
+        estado.setText(" ");
+
+        jLabel2.setText("BALANCE ATM");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnAtras))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(62, 62, 62)
+                        .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(145, 145, 145)
+                        .addComponent(jLabel2)))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnAtras)
+                .addGap(41, 41, 41)
+                .addComponent(jLabel2)
+                .addGap(35, 35, 35)
+                .addComponent(estado)
+                .addContainerGap(158, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
+        this.setVisible(false);
+        this.dispose();          
+    }//GEN-LAST:event_btnAtrasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +113,8 @@ public class BalanceATM extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtras;
+    private javax.swing.JLabel estado;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

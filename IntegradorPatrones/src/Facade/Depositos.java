@@ -8,11 +8,8 @@ package Facade;
 import Singleton.Account;
 import Singleton.AtmUK;
 import Iterator.ManejadorValores;
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author Dark
- */
 public class Depositos extends javax.swing.JFrame {
  
     Account cuenta;
@@ -20,6 +17,7 @@ public class Depositos extends javax.swing.JFrame {
     
     public Depositos() {
         initComponents();
+        setDefaultCloseOperation(Depositos.DISPOSE_ON_CLOSE);
     }
 
     public void agregarElementos(AtmUK atmUk, Account cuenta){
@@ -105,14 +103,25 @@ public class Depositos extends javax.swing.JFrame {
 
     private void btnDepositarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDepositarActionPerformed
         
-        double cantidad = Double.parseDouble(this.campoValor.getText());
-        while( cantidad > 0 ){
-            for(ManejadorValores manejador: atmUk.getManejadores()){
-                double cantidadParcil = cantidad;
-                // while
-            }            
-        }
+        double cantidad = Double.parseDouble(campoValor.getText());
         
+        for ( ManejadorValores manejador : this.atmUk.getManejadores()) {
+            
+            while (true) {
+                double monto = cantidad - manejador.getDenominacion();
+                if (monto >= 0) {
+                    manejador.depositar(1);
+                    this.atmUk.ingresarDinero(manejador.getDenominacion());
+                    cantidad -= manejador.getDenominacion();
+                    this.cuenta.deposit(manejador.getDenominacion());
+                } else {
+                    break;
+                }
+            }
+        }    
+        JOptionPane.showMessageDialog(null, cuenta.status());
+        this.setVisible(false);
+        this.dispose();          
     }//GEN-LAST:event_btnDepositarActionPerformed
 
     /**

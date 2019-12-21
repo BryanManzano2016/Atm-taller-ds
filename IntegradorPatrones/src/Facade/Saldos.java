@@ -15,6 +15,7 @@ public class Saldos extends javax.swing.JFrame {
  
     public Saldos() {
         initComponents();
+        setDefaultCloseOperation(Depositos.DISPOSE_ON_CLOSE);        
     }
 
     public void mostrarSaldo(Account cuenta){

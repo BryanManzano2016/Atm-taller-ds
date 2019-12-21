@@ -5,6 +5,7 @@ import Iterator.ManejadorValores;
 import Singleton.Account;
 import Singleton.AtmUK;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class VentanaPrincipal extends javax.swing.JFrame {
 
@@ -13,16 +14,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     
     public VentanaPrincipal() {
         initComponents();
-                               
+                 
+        cargarDatos();
+    }
+
+    public void cargarDatos(){
+        
         // Crear un único cajero Automático de dólares con 100 billetes de 20, 100 de 10, 
         // 10 monedas de 0.50, 10 de 0.25 y 1000 de 0.05
         atm = new AtmUK();
-        ManejadorValores bill_100 = new ManejadorValores(100, 20.0);
+        ManejadorValores bill_20 = new ManejadorValores(100, 20.0);
         ManejadorValores bill_10 = new ManejadorValores(100, 10.0);    
         ManejadorValores mon_50 = new ManejadorValores(10, 0.5);
         ManejadorValores mon_25 = new ManejadorValores(10, 0.25);
         ManejadorValores mon_5 = new ManejadorValores(1000, 0.05);        
-        atm.addManejador(bill_100);
+        atm.addManejador(bill_20);
         atm.addManejador(bill_10);        
         atm.addManejador(mon_50);
         atm.addManejador(mon_25);
@@ -52,11 +58,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         cuentas.add(cuenta8);
         cuentas.add(cuenta9);
         
-        // Menú principal para seleccionar una de las 10 cuentas solo con el id
-        // Mostrar el menú para realizar transacciones en el cajero automático        
+        atm.cargarDinero();
         
     }
-
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -79,6 +84,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
 
         btnRetiro.setText("Retiros");
+        btnRetiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRetiroActionPerformed(evt);
+            }
+        });
 
         btnDepositos.setText("Depositos");
         btnDepositos.addActionListener(new java.awt.event.ActionListener() {
@@ -88,6 +98,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
 
         btnBalance.setText("Balance ATM");
+        btnBalance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBalanceActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Cuenta ID: ");
 
@@ -137,16 +152,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaldosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaldosActionPerformed
-        
-        for (Account cuenta: cuentas) {
-            if (cuenta.getId() == Integer.parseInt( this.campoId.getText() )) {
-                Saldos saldosVent = new Saldos();
-                saldosVent.mostrarSaldo(cuenta);
-                saldosVent.setVisible(true);
-                break;
-            }
-        }
-        
+        try{
+            if (!this.campoId.getText().equals("") ) {
+                for (Account cuenta: cuentas) {
+                    if (cuenta.getId() == Integer.parseInt( this.campoId.getText() )) {
+                        Saldos saldosVent = new Saldos();
+                        saldosVent.mostrarSaldo(cuenta);
+                        saldosVent.setVisible(true);
+                        break;
+                    }                    
+                }
+            } 
+        } catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Ingrese un id de cuenta.");                
+        }        
     }//GEN-LAST:event_btnSaldosActionPerformed
 
     private void campoIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoIdActionPerformed
@@ -154,17 +173,44 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_campoIdActionPerformed
 
     private void btnDepositosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDepositosActionPerformed
-        
-        for (Account cuenta: cuentas) {
-            if (cuenta.getId() == Integer.parseInt( this.campoId.getText() )) {
-                Depositos depositosVent = new Depositos();
-                depositosVent.agregarElementos(atm, cuenta);
-                depositosVent.setVisible(true);
-                break;
+        try{
+            if (!this.campoId.getText().equals("")) {
+                for (Account cuenta: cuentas) {
+                    if (cuenta.getId() == Integer.parseInt( this.campoId.getText() )) {
+                        Depositos depositosVent = new Depositos();
+                        depositosVent.agregarElementos(atm, cuenta);
+                        depositosVent.setVisible(true);
+                        break;
+                    }               
+                } 
             }
-        }        
-
+        } catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Ingrese un id de cuenta.");                
+        }             
     }//GEN-LAST:event_btnDepositosActionPerformed
+
+    private void btnRetiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetiroActionPerformed
+        try{
+            if (!this.campoId.getText().equals("")) {
+                for (Account cuenta: cuentas) {
+                    if (cuenta.getId() == Integer.parseInt( this.campoId.getText() )) {
+                        Retiros depositosVent = new Retiros();
+                        depositosVent.agregarElementos(atm, cuenta);
+                        depositosVent.setVisible(true);
+                        break;
+                    }             
+                }  
+            }
+            } catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Ingrese un id de cuenta.");                
+            }          
+    }//GEN-LAST:event_btnRetiroActionPerformed
+
+    private void btnBalanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBalanceActionPerformed
+        BalanceATM balance = new BalanceATM();
+        balance.agregarElementos(atm);
+        balance.setVisible(true);
+    }//GEN-LAST:event_btnBalanceActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

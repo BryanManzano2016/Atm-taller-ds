@@ -1,7 +1,7 @@
  
 package Iterator;
 
-public class ManejadorValores {
+public class ManejadorValores{
     protected int monto;
     protected double denominacion;
 
@@ -10,19 +10,27 @@ public class ManejadorValores {
         this.denominacion = denominacion; // Valor de cada billete
     }
     
-    public int getMonto(){ return monto; }
+    public int getMonto(){ return this.monto; }
     
     public void setMonto(int monto){ this.monto = monto; }
 
-    public boolean retirar(int monto){
-        // Implementar
+    public boolean retirar(int montoA){
+        if (this.monto - montoA >= 0) {
+            this.monto -= this.monto;
+            return true;
+        }
         return false;
     }
 
-    public double getDenominacion(){ return denominacion; }
+    public double getDenominacion(){ return this.denominacion; }
 
-    public boolean depositar(int monto, double denominacion){
-        // Implementar
-        return false;
+    public void depositar(int monto){
+        this.monto += monto;
     }
+
+    @Override
+    public String toString() {
+        return "ManejadorValores{" + "monto=" + this.monto + ", denominacion=" + this.denominacion + '}';
+    }
+    
 }

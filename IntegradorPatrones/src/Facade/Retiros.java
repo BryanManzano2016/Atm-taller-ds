@@ -5,19 +5,30 @@
  */
 package Facade;
 
+import Iterator.ManejadorValores;
+import Singleton.Account;
+import Singleton.AtmUK;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Dark
  */
 public class Retiros extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Retiros
-     */
+    Account cuenta;
+    AtmUK atmUk;
+    
     public Retiros() {
         initComponents();
+        setDefaultCloseOperation(Retiros.DISPOSE_ON_CLOSE); 
     }
 
+    public void agregarElementos(AtmUK atmUk, Account cuenta){
+        this.atmUk = atmUk;
+        this.cuenta = cuenta;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,21 +38,105 @@ public class Retiros extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnAtras = new javax.swing.JButton();
+        btnRetirar = new javax.swing.JButton();
+        campoValor = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        btnAtras.setText("Atras");
+        btnAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasActionPerformed(evt);
+            }
+        });
+
+        btnRetirar.setText("Retirar");
+        btnRetirar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRetirarActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Monto: ");
+
+        jLabel2.setText("RETIROS");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnAtras))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addComponent(jLabel1)
+                        .addGap(34, 34, 34)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(campoValor, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addComponent(btnRetirar))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(175, 175, 175)
+                        .addComponent(jLabel2)))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnAtras)
+                .addGap(40, 40, 40)
+                .addComponent(jLabel2)
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(campoValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addComponent(btnRetirar)
+                .addContainerGap(121, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
+        this.setVisible(false);
+        this.dispose();  
+    }//GEN-LAST:event_btnAtrasActionPerformed
+
+    private void btnRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetirarActionPerformed
+        
+        double cantidad = Double.parseDouble(campoValor.getText());
+       
+        if (cantidad > atmUk.getTotal() || cuenta.getAmount() < cantidad) {
+            JOptionPane.showMessageDialog(null, "Cajero con dinero insuficiente");
+        } else {
+            for ( ManejadorValores manejador : this.atmUk.getManejadores()) {
+
+                while (true) {
+                    double monto = cantidad - manejador.getDenominacion();
+                    if (monto >= 0) {
+                        manejador.retirar(1);
+                        this.atmUk.sacarDinero(manejador.getDenominacion());
+                        cantidad -= manejador.getDenominacion();
+                        this.cuenta.withdraw(manejador.getDenominacion());
+                    } else {
+                        break;
+                    }
+                }
+            }    
+            JOptionPane.showMessageDialog(null, cuenta.status());
+            this.setVisible(false);
+            this.dispose();              
+        }    
+    }//GEN-LAST:event_btnRetirarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +174,10 @@ public class Retiros extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtras;
+    private javax.swing.JButton btnRetirar;
+    private javax.swing.JTextField campoValor;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

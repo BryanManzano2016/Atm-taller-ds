@@ -74,6 +74,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Retiros"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRetiroActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnDepositos">
       <Properties>
@@ -87,6 +90,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Balance ATM"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBalanceActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
