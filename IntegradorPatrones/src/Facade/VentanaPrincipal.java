@@ -1,9 +1,7 @@
  
 package Facade;
 
-import chainOfResponsability.ManejadorBilletes;
-import chainOfResponsability.ManejadorInterface;
-import chainOfResponsability.ManejadorMonedas;
+import Iterator.ManejadorValores;
 import Singleton.Account;
 import Singleton.AtmUK;
 import java.util.ArrayList;
@@ -19,13 +17,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // Crear un único cajero Automático de dólares con 100 billetes de 20, 100 de 10, 
         // 10 monedas de 0.50, 10 de 0.25 y 1000 de 0.05
         atm = new AtmUK();
-        ManejadorInterface bill_100 = new ManejadorBilletes(100, 20);
-        ManejadorInterface bill_10 = new ManejadorBilletes(100, 10);        
+        ManejadorValores bill_100 = new ManejadorValores(100, 20.0);
+        ManejadorValores bill_10 = new ManejadorValores(100, 10.0);    
+        ManejadorValores mon_50 = new ManejadorValores(10, 0.5);
+        ManejadorValores mon_25 = new ManejadorValores(10, 0.25);
+        ManejadorValores mon_5 = new ManejadorValores(1000, 0.05);        
         atm.addManejador(bill_100);
         atm.addManejador(bill_10);        
-        ManejadorInterface mon_50 = new ManejadorMonedas(10, 0.5);
-        ManejadorInterface mon_25 = new ManejadorMonedas(10, 0.25);
-        ManejadorInterface mon_5 = new ManejadorMonedas(1000, 0.05);
         atm.addManejador(mon_50);
         atm.addManejador(mon_25);
         atm.addManejador(mon_5);
@@ -160,8 +158,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         for (Account cuenta: cuentas) {
             if (cuenta.getId() == Integer.parseInt( this.campoId.getText() )) {
                 Depositos depositosVent = new Depositos();
-                saldosVent.mostrarSaldo(cuenta);
-                saldosVent.setVisible(true);
+                depositosVent.agregarElementos(atm, cuenta);
+                depositosVent.setVisible(true);
                 break;
             }
         }        

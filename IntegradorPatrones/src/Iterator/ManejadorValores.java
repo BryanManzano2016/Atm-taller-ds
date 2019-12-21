@@ -1,30 +1,27 @@
  
-package chainOfResponsability;
+package Iterator;
 
-public class ManejadorBilletes implements ManejadorInterface {
+public class ManejadorValores {
     protected int monto;
-    protected int denominacion;
+    protected double denominacion;
 
-    public ManejadorBilletes(int monto, int denominacion){
+    public ManejadorValores(int monto, double denominacion){
         this.monto = monto; // Total de billetes
         this.denominacion = denominacion; // Valor de cada billete
     }
     
-    @Override
     public int getMonto(){ return monto; }
     
-    @Override
     public void setMonto(int monto){ this.monto = monto; }
 
-    @Override
     public boolean retirar(int monto){
         // Implementar
         return false;
     }
 
-    public int getDenominacion(){ return denominacion; }
+    public double getDenominacion(){ return denominacion; }
 
-    public boolean depositar(int monto, int denominacion){
+    public boolean depositar(int monto, double denominacion){
         // Implementar
         return false;
     }

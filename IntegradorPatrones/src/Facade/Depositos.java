@@ -7,8 +7,7 @@ package Facade;
 
 import Singleton.Account;
 import Singleton.AtmUK;
-import chainOfResponsability.ManejadorBilletes;
-import chainOfResponsability.ManejadorInterface;
+import Iterator.ManejadorValores;
 
 /**
  *
@@ -108,11 +107,7 @@ public class Depositos extends javax.swing.JFrame {
         
         double cantidad = Double.parseDouble(this.campoValor.getText());
         while( cantidad > 0 ){
-            for(ManejadorInterface manejador: atmUk.getManejadores()){
-                if (manejador instanceof ManejadorBilletes) {
-                    
-                }
-                
+            for(ManejadorValores manejador: atmUk.getManejadores()){
                 double cantidadParcil = cantidad;
                 // while
             }            

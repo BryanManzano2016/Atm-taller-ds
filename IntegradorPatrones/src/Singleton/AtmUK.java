@@ -1,7 +1,7 @@
  
 package Singleton;
 
-import chainOfResponsability.ManejadorInterface;
+import Iterator.ManejadorValores;
 import java.util.LinkedList;
 // import java.util.Currency;
 // import java.util.Locale;
@@ -11,7 +11,7 @@ public class AtmUK {
     static Scanner in = new Scanner(System.in);
     // protected final Currency currency=Locale.UK;
     protected double dinero = 0;
-    protected LinkedList <ManejadorInterface> manejadores; // Cada manejador puede entregar dinero de una sola denominación
+    protected LinkedList <ManejadorValores> manejadores; // Cada manejador puede entregar dinero de una sola denominación
 
     // -----------------
     public AtmUK() {
@@ -34,15 +34,15 @@ public class AtmUK {
         // Todo: Sólo se puede depositar billetes de una sola denominación y agregarse al manejador correspondiente
     }
 
-    public void addManejador(ManejadorInterface m){
+    public void addManejador(ManejadorValores m){
         manejadores.add(m);
     }
     
-    public ManejadorInterface removeManejador(int i){
+    public ManejadorValores removeManejador(int i){
         return manejadores.remove(i);
     }
     
-    public LinkedList <ManejadorInterface> getManejadores(){
+    public LinkedList <ManejadorValores> getManejadores(){
         return this.manejadores;
     }
 
