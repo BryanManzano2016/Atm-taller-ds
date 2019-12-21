@@ -5,10 +5,8 @@ import Iterator.ManejadorValores;
 import java.util.LinkedList;
 // import java.util.Currency;
 // import java.util.Locale;
-import java.util.Scanner;
 
 public class AtmUK {
-    static Scanner in = new Scanner(System.in);
     // protected final Currency currency=Locale.UK;
     protected double dinero = 0;
     protected LinkedList <ManejadorValores> manejadores; // Cada manejador puede entregar dinero de una sola denominación

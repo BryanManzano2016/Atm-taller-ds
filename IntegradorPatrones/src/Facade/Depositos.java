@@ -12,8 +12,8 @@ import javax.swing.JOptionPane;
 
 public class Depositos extends javax.swing.JFrame {
  
-    Account cuenta;
-    AtmUK atmUk;
+    private Account cuenta;
+    private AtmUK atmUk;
     
     public Depositos() {
         initComponents();

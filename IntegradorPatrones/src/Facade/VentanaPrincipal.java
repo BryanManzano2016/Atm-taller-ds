@@ -9,8 +9,8 @@ import javax.swing.JOptionPane;
 
 public class VentanaPrincipal extends javax.swing.JFrame {
 
-    AtmUK atm;
-    ArrayList<Account> cuentas;
+    private AtmUK atm;
+    private ArrayList<Account> cuentas;
     
     public VentanaPrincipal() {
         initComponents();

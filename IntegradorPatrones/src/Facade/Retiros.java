@@ -1,23 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+ 
 package Facade;
 
 import Iterator.ManejadorValores;
 import Singleton.Account;
 import Singleton.AtmUK;
 import javax.swing.JOptionPane;
-
-/**
- *
- * @author Dark
- */
+ 
 public class Retiros extends javax.swing.JFrame {
 
-    Account cuenta;
-    AtmUK atmUk;
+    private Account cuenta;
+    private AtmUK atmUk;
     
     public Retiros() {
         initComponents();

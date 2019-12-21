@@ -7,10 +7,6 @@ package Facade;
 
 import Singleton.Account;
 
-/**
- *
- * @author Dark
- */
 public class Saldos extends javax.swing.JFrame {
  
     public Saldos() {
