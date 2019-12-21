@@ -1,7 +1,6 @@
-package principal;
+package Singleton;
 
-import java.util.Currency;
-import java.util.Iterator;
+import java.util.Currency; 
 import java.util.Locale;
 
 // Asuma que de esta clase solo tiene el .class
@@ -32,12 +31,12 @@ public final class Account{
     }
      
     public String status() {
-        return c.getCurrencyCode() + " " +amount + " in the account";
+        return c.getCurrencyCode() + " " +amount + " en la cuenta";
     }
      
     public String deposit(double deposit) {
         amount += deposit;
-        return c.getCurrencyCode() + " " +deposit;
+        return c.getCurrencyCode() + " " + deposit;
     }
      
     public String withdraw(double w) {

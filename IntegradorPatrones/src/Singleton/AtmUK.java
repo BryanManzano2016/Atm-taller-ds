@@ -1,8 +1,8 @@
  
-package principal;
+package Singleton;
 
 import chainOfResponsability.ManejadorInterface;
-import java.util.ArrayList;
+import java.util.LinkedList;
 // import java.util.Currency;
 // import java.util.Locale;
 import java.util.Scanner;
@@ -11,11 +11,11 @@ public class AtmUK {
     static Scanner in = new Scanner(System.in);
     // protected final Currency currency=Locale.UK;
     protected double dinero = 0;
-    protected ArrayList <ManejadorInterface> manejadores; // Cada manejador puede entregar dinero de una sola denominación
+    protected LinkedList <ManejadorInterface> manejadores; // Cada manejador puede entregar dinero de una sola denominación
 
     // -----------------
     public AtmUK() {
-      manejadores = new ArrayList<>();
+      manejadores = new LinkedList<>();
     }
     // -----------------
     public double getTotal() {
@@ -37,8 +37,13 @@ public class AtmUK {
     public void addManejador(ManejadorInterface m){
         manejadores.add(m);
     }
+    
     public ManejadorInterface removeManejador(int i){
         return manejadores.remove(i);
+    }
+    
+    public LinkedList <ManejadorInterface> getManejadores(){
+        return this.manejadores;
     }
 
     //Dentro de las transacciones se debe llamar al ATM para hacer el retiro o deposito de la cuenta correspondiente
